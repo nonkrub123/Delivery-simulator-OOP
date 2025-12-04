@@ -19,48 +19,48 @@ class Driver(Person):
         super().__init__(name)
         self.vehicle = vehicle
         
-    
     def deliver(self,order,customer_name):
         print(f"{self.name} is delivering {order} to {customer_name} using {self.vehicle}.")
-    
+        return True
+
+
 class DeliveryOrder:
     def __init__(self,customer,item):
         self.customer = customer
         self.item = item
         self.status = "preparing"
-    
+        self.driver = None
+
     def assign_driver(self,driver):
-        driver.deliver(self.item, self.customer)
-        self.status = "delivered"
-    
+        self.driver = driver
+
+    def pass_to_driver(self):
+        if self.driver.deliver(self.item,self.customer):
+            self.status = "delivered"
+        
     def get_status(self):
         return f"Order for {self.item} → {self.status}"
     
     def summary(self):
-        global driver
-        return f"Order Summary:\nItem: {self.item}\nCustomer: {self.customer}\nStatus: {self.status}\nDriver: {driver.name}"
-        print("Order Summary:")
-        print(f"Item: {self.item}")
-        print(f"Customer: {self.customer}")
-        print(f"Status: {self.status}")
-        print("Driver: {}")
+        return f"Order Summary:\nItem: {self.item}\nCustomer: {self.customer}\nStatus: {self.status}\nDriver: {self.driver.name}"
 
 Alice = Customer("Alice","test")
 Bob = Customer("Bob","test")
 driver = Driver("David","motorcycle")
 
-selected_driver = None
 
 order1 = Alice.place_order("Laptop")
 order2 = Bob.place_order("Headphones")
+order1.assign_driver(driver)
+order2.assign_driver(driver)
 print()
 print(order1.summary())
 print()
 print(order2.summary())
 print()
 
-order1.assign_driver(driver)
-order2.assign_driver(driver)
+order1.pass_to_driver()
+order2.pass_to_driver()
 print()
 
 print("Final Status:")
