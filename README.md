@@ -10,12 +10,15 @@ This project about using OOP class to simulate ordering and delivery online. We 
 ## How to run
 You could run by opening in complier like vscode and run main.py
 ## Structure
-|
-|
-|--python.py
-|
-|--README.md
-|
-|-- picture.jpg
+```
+Delivery simulator OOP/
+│
+├── README.md                          # This file
+│
+├── main.py/
+│
+├── image.jpg/
+│
+```
 
 The project is 100% implemented but I still a bit confused about the delivery system so I'm not quite sure if it's correct but I hope it is.
